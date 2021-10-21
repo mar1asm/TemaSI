@@ -7,8 +7,8 @@ const fs = require("fs");
 class NodeA {
     
     constructor() {
-        this.K2 = "12345678"
-        this.IV = "12345678"
+        this.K2 = "abcdefgh"
+        this.IV = "qwertyui"
         this.mode = ""
         this.cryptedKey = ""
         this.startComm = false;
@@ -25,7 +25,7 @@ class NodeA {
     }
 
     requestEncryptionKey() { //request the key from node KM
-        this.K2 = "12345678"
+        this.K2 = "abcdefgh"
         this.cryptedKey = KM.getEncryptionKey();
         console.log("[NodeA] Key before decryption: ", this.cryptedKey)
         var decryptedText = CryptoJS.AES.decrypt(this.cryptedKey, this.K2);
@@ -38,7 +38,7 @@ class NodeA {
     }
 
 
-    encECB(text) {
+    ECB_Encryption(text) {
         const array = [];
         let cryptedArray = [];
 
@@ -53,7 +53,7 @@ class NodeA {
         return cryptedArray;
     }
 
-    encCBC(text) {  // mai multe functii
+    CBC_Encryption(text) {  
         let cryptedArray = [];
         let chunks = [];
 
@@ -88,9 +88,9 @@ class NodeA {
         this.sendEncryptionMode()
         let text = fs.readFileSync("./file.txt", "utf-8");
         if (this.mode == "ECB") {
-            NodeB.setText(this.encECB(text))
+            NodeB.setText(this.ECB_Encryption(text))
         } else {
-            NodeB.setText(this.encCBC(text))
+            NodeB.setText(this.CBC_Encryption(text))
         }
         
        

@@ -7,7 +7,7 @@ class KM {
     }
 
     static getEncryptionKey() {
-        this.K2 = "12345678";
+        this.K2 = "abcdefgh";
         this.K1 = Utils.getRandomString(8);
 
         console.log("[KM] Key before encryption: ", this.K1)

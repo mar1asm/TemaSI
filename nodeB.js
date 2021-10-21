@@ -3,7 +3,7 @@ let CryptoJS = require("crypto-js");
 
 class NodeB {
     constructor() {
-        this.K2 = "12345678";
+        this.K2 = "abcdefgh";
     }
 
     static setEncryptionMode(mode) {
@@ -12,7 +12,7 @@ class NodeB {
 
 
     static setEncryptionKey(cryptedKey) {
-        this.K2 = "12345678";
+        this.K2 = "abcdefgh";
         this.cryptedKey = cryptedKey;
         console.log("[NodeB] Key before decryption: ", this.cryptedKey)
         var decryptedText = CryptoJS.AES.decrypt(cryptedKey, this.K2);
@@ -22,15 +22,15 @@ class NodeB {
 
     static setText(encryptedText) {
         if (this.mode == "ECB") {
-            this.decECB(encryptedText)
+            this.ECB_Decryption(encryptedText)
         } else {
-            this.decCBC(encryptedText)
+            this.CBC_Decryption(encryptedText)
         }
     }
 
 
-    static decECB(cryptedArray) {
-        this.IV = "12345678";
+    static ECB_Decryption(cryptedArray) {
+        this.IV = "qwertyui";
         let decryptedArray = [];
         cryptedArray.forEach((block, index) => {
             var decryptedText = CryptoJS.AES.decrypt(block, this.key);
@@ -42,7 +42,7 @@ class NodeB {
 
     
 
-    static decCBC(cryptedArray) {
+    static CBC_Decryption(cryptedArray) {
         let decryptedArray = [];
         let decText = "";
 
